@@ -62,8 +62,8 @@
 .design-option[aria-pressed="true"] small { color: #1a1b1e; }
 .design-close { font: inherit; font-size: 0.85rem; background: transparent; border: 0; color: var(--pencil); cursor: pointer; padding: 6px; align-self: flex-end; }
 @media (max-width: 760px) {
-  .design-fab { bottom: calc(80px + env(safe-area-inset-bottom, 0px)); }
-  .design-drawer { bottom: calc(120px + env(safe-area-inset-bottom, 0px)); }
+  body:has(.mobile-bar) .design-fab { bottom: calc(80px + env(safe-area-inset-bottom, 0px)); }
+  body:has(.mobile-bar) .design-drawer { bottom: calc(120px + env(safe-area-inset-bottom, 0px)); }
 }
 @media (prefers-reduced-motion: reduce) { .design-drawer { transition: none; } }
 

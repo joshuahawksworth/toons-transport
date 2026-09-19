@@ -145,10 +145,15 @@ export default function Home() {
         <BookingForm phone={site.phone} whatsapp={site.whatsapp} email={site.email} />
       </section>
 
-      <div className="mobile-bar">
-        {site.phone ? <a href={telHref(site.phone)} className="btn">Call</a> : site.whatsapp ? <a href={`https://wa.me/${site.whatsapp}`} className="btn">WhatsApp</a> : null}
-        <Link href="#book" className="btn btn-primary">Book a pickup</Link>
-      </div>
+      {(site.phone || site.whatsapp) && (
+        <div className="mobile-bar">
+          {site.phone ? (
+            <a href={telHref(site.phone)} className="btn">Call {site.phone}</a>
+          ) : (
+            <a href={`https://wa.me/${site.whatsapp}`} className="btn">WhatsApp us</a>
+          )}
+        </div>
+      )}
     </>
   );
 }

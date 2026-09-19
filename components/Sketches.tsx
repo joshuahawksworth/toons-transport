@@ -127,10 +127,10 @@ export function VanSketch({ draw = false, ...rest }: VanSketchProps) {
 }
 
 /** Wordmark: the TT monogram set in the same face as the name. */
-export function Logo({ compact = false }: { compact?: boolean }) {
+export function Logo({ compact = false, mark = true }: { compact?: boolean; mark?: boolean }) {
   return (
     <span className={`logo${compact ? " logo-compact" : ""}`}>
-      <span className="logo-tt" aria-hidden="true">TT</span>
+      {mark && <span className="logo-tt" aria-hidden="true">TT</span>}
       <span className="logo-word">
         Toon<span className="logo-word-2">Transport</span>
       </span>

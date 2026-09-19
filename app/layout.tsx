@@ -47,7 +47,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <a className="skip" href="#main">Skip to content</a>
         <header className="nav">
           <Link href="/" className="nav-logo" aria-label="Toon Transport home">
-            <Logo compact />
+            <Logo compact mark={false} />
           </Link>
           <nav aria-label="Main">
             <Link href="/#services">What we do</Link>
