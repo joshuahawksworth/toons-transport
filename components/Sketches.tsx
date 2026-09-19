@@ -79,14 +79,11 @@ export function VanSketch({ draw = false, ...rest }: VanSketchProps) {
   const g = draw ? "sketch-draw" : undefined;
   const p = (i: number) => ({ style: { ["--i" as string]: i } });
   return (
-    <svg viewBox="0 0 470 176" role="img" aria-label="A sketched van with its ramp down and a motorbike waiting behind it" {...rest}>
+    <svg viewBox="0 0 470 160" role="img" aria-label="A sketched van with its ramp down and a motorbike waiting behind it" {...rest}>
       <g filter="url(#wobble)" className={g} {...stroke}>
         {/* road, straight under the wheels */}
         <path d="M6 141 H464" strokeWidth="2" {...p(0)} />
         <path d="M30 152 H54 M78 152 H102 M126 152 H150 M174 152 H198 M222 152 H246 M270 152 H294 M318 152 H342 M366 152 H390 M414 152 H438" strokeWidth="1.6" className="pencil" {...p(1)} />
-        {/* a bit of weather, because it's the UK */}
-        <path d="M196 14 q 6 -12 18 -6 q 6 -10 18 -4 q 12 -2 12 8 q 6 4 0 8 H 198 q -8 -2 -2 -6" strokeWidth="1.8" className="pencil" {...p(2)} />
-        <path d="M214 28 l -3 6 M224 28 l -3 6 M234 28 l -3 6" strokeWidth="1.6" className="pencil" {...p(2)} />
 
         {/* van body, cab on the left: bonnet, windscreen, long roof, square back */}
         <path d="M300 122 V50 Q300 40 290 40 H130 L92 74 H46 Q32 74 32 90 V122 Z" {...p(4)} />
@@ -123,30 +120,17 @@ export function VanSketch({ draw = false, ...rest }: VanSketchProps) {
           <path d="M392 32 q 2 10 -4 20" {...stroke} strokeWidth="1.6" className="pencil" />
           <text x="60" y="30">us</text>
           <path d="M78 26 q 22 -6 30 10" {...stroke} strokeWidth="1.6" className="pencil" />
-          <text x="14" y="170">fig. 1 - loading up</text>
         </g>
       </g>
     </svg>
   );
 }
 
-/** The official mark: two T's in a box. Same drawing as the favicon. */
-export function Mark(props: SVGProps<SVGSVGElement>) {
-  return (
-    <svg viewBox="0 0 48 48" role="img" aria-label="Toon Transport" {...props}>
-      <g filter="url(#wobble)" fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round">
-        <rect x="3" y="3" width="42" height="42" rx="4" strokeWidth="2.4" />
-        <path d="M8 14 H22 M15 14 V36 M26 14 H40 M33 14 V36" strokeWidth="5" />
-      </g>
-    </svg>
-  );
-}
-
-/** Wordmark and mark together. */
+/** Wordmark: the TT monogram set in the same face as the name. */
 export function Logo({ compact = false }: { compact?: boolean }) {
   return (
     <span className={`logo${compact ? " logo-compact" : ""}`}>
-      <Mark className="logo-mark" />
+      <span className="logo-tt" aria-hidden="true">TT</span>
       <span className="logo-word">
         Toon<span className="logo-word-2">Transport</span>
       </span>
@@ -158,7 +142,7 @@ type IconName = "wrench" | "van" | "house" | "tag" | "phone" | "clipboard" | "ma
 
 const ICONS: Record<IconName, string> = {
   wrench: "M14 4 a6 6 0 0 0 -7 8 L3 16 l 3 3 l 4 -4 a6 6 0 0 0 8 -7 l -3 3 l -3 -1 l -1 -3 z",
-  van: "M2 15 V7 h11 v8 M13 9 h5 l3 4 v2 h-19 M6 18 a2 2 0 1 0 0.1 0 M17 18 a2 2 0 1 0 0.1 0",
+  van: "M2 16 V7 h11 v9 M13 9 h5 l3 4 v3 h-19 M5 17.5 a2.5 2.5 0 1 0 5 0 a2.5 2.5 0 1 0 -5 0 M14 17.5 a2.5 2.5 0 1 0 5 0 a2.5 2.5 0 1 0 -5 0",
   house: "M3 11 L12 4 L21 11 M5 10 V20 h14 V10 M10 20 v-6 h4 v6",
   tag: "M3 12 L12 3 h8 v8 L11 20 z M16 7 a1 1 0 1 0 0.1 0",
   phone: "M5 3 h4 l2 5 l-2 2 a11 11 0 0 0 5 5 l2 -2 l5 2 v4 a2 2 0 0 1 -2 2 A16 16 0 0 1 3 5 a2 2 0 0 1 2 -2",

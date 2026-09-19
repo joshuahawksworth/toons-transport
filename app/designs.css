@@ -4,35 +4,68 @@
    components whose shape is design-specific. Same content, same form.
    ===================================================================== */
 
-/* ---------- review-only design picker: lives in the header's spare corner ---------- */
-.design-switch {
+/* ---------- temporary design picker: small button bottom-left, drawer above it ---------- */
+.design-fab {
   position: fixed;
-  top: calc(env(safe-area-inset-top, 0px) + 12px);
-  right: 16px;
-  z-index: 40;
-  display: flex;
-  flex-direction: column;
-  gap: 6px;
-  align-items: flex-end;
-  font-family: var(--font-body), system-ui, sans-serif;
-  font-size: 0.85rem;
-}
-.design-switch button {
-  font: inherit;
-  cursor: pointer;
+  left: 12px;
+  bottom: calc(12px + env(safe-area-inset-bottom, 0px));
+  z-index: 45;
+  font: 600 0.8rem/1 var(--font-body), system-ui, sans-serif;
   background: var(--ink);
   color: var(--paper);
   border: 0;
-  padding: 8px 12px;
   border-radius: 999px;
+  padding: 9px 12px;
+  cursor: pointer;
+  opacity: 0.85;
 }
-.design-switch-panel { display: flex; gap: 6px; background: var(--paper); border: 1px solid var(--ink); padding: 6px; border-radius: 999px; }
-.design-switch-panel button { background: transparent; color: var(--ink); padding: 6px 10px; }
-.design-switch-panel button[aria-pressed="true"] { background: var(--marker); color: #1a1b1e; }
-/* on wide screens the header's right side holds the nav, so tuck the picker under it */
-@media (min-width: 761px) {
-  .design-switch { top: calc(env(safe-area-inset-top, 0px) + 84px); }
+.design-fab:hover { opacity: 1; }
+.design-scrim { position: fixed; inset: 0; z-index: 44; background: rgba(0, 0, 0, 0.25); }
+.design-drawer {
+  position: fixed;
+  left: 12px;
+  bottom: calc(52px + env(safe-area-inset-bottom, 0px));
+  z-index: 46;
+  width: min(300px, calc(100vw - 24px));
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  padding: 14px;
+  background: var(--paper);
+  color: var(--ink);
+  border: 1px solid var(--ink);
+  border-radius: 12px;
+  font-family: var(--font-body), system-ui, sans-serif;
+  transform: translateY(12px);
+  opacity: 0;
+  visibility: hidden;
+  transition: transform 0.18s ease, opacity 0.18s ease, visibility 0s 0.18s;
 }
+.design-drawer[data-open] { transform: none; opacity: 1; visibility: visible; transition-delay: 0s; }
+.design-drawer-title { margin: 0 0 4px; font-size: 0.8rem; letter-spacing: 0.06em; text-transform: uppercase; color: var(--pencil); }
+.design-option {
+  font: inherit;
+  text-align: left;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  padding: 10px 12px;
+  border: 1px solid var(--line, var(--pencil));
+  border-radius: 8px;
+  background: transparent;
+  color: var(--ink);
+  cursor: pointer;
+}
+.design-option span { font-weight: 600; }
+.design-option small { color: var(--pencil); font-size: 0.8rem; }
+.design-option[aria-pressed="true"] { background: var(--marker); border-color: var(--marker); color: #1a1b1e; }
+.design-option[aria-pressed="true"] small { color: #1a1b1e; }
+.design-close { font: inherit; font-size: 0.85rem; background: transparent; border: 0; color: var(--pencil); cursor: pointer; padding: 6px; align-self: flex-end; }
+@media (max-width: 760px) {
+  .design-fab { bottom: calc(80px + env(safe-area-inset-bottom, 0px)); }
+  .design-drawer { bottom: calc(120px + env(safe-area-inset-bottom, 0px)); }
+}
+@media (prefers-reduced-motion: reduce) { .design-drawer { transition: none; } }
 
 /* =====================================================================
    HI-VIS: recovery-truck livery. Asphalt ground, reflective yellow, heavy
@@ -84,7 +117,7 @@
 /* logo */
 :root[data-design="hivis"] .logo-word { font-weight: 800; text-transform: uppercase; letter-spacing: 0.02em; }
 :root[data-design="hivis"] .logo-word-2 { color: var(--marker); letter-spacing: 0.16em; }
-:root[data-design="hivis"] .logo-mark { color: var(--marker); }
+:root[data-design="hivis"] .logo-tt { font-weight: 800; letter-spacing: -0.04em; color: var(--marker); }
 
 /* buttons */
 :root[data-design="hivis"] .btn { border-radius: 0; text-transform: uppercase; font-weight: 700; letter-spacing: 0.06em; border-width: 2px; }
@@ -207,7 +240,7 @@
 :root[data-design="paddock"] .nav nav a { font-family: var(--font-body); font-weight: 600; font-size: 0.95rem; }
 :root[data-design="paddock"] .logo-word { font-weight: 700; letter-spacing: -0.02em; }
 :root[data-design="paddock"] .logo-word-2 { color: var(--blue); letter-spacing: 0.14em; font-size: 0.6em; }
-:root[data-design="paddock"] .logo-mark { color: var(--blue); }
+:root[data-design="paddock"] .logo-tt { font-weight: 700; letter-spacing: -0.06em; color: var(--blue); }
 
 /* buttons */
 :root[data-design="paddock"] .btn { border-radius: 8px; font-family: var(--font-body); font-weight: 600; letter-spacing: 0; border-width: 1.5px; border-color: var(--ink); }

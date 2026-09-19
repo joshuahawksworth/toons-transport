@@ -20,7 +20,6 @@ const body = Atkinson_Hyperlegible({ weight: ["400", "700"], style: ["normal", "
 export const metadata: Metadata = {
   title: { default: `${site.name} · ${site.slogan}`, template: `%s · ${site.name}` },
   description: site.description,
-  icons: { icon: "/favicon.svg" },
   openGraph: { title: site.name, description: site.slogan, type: "website", locale: "en_GB" },
 };
 
