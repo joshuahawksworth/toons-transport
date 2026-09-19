@@ -1,12 +1,20 @@
 import type { Metadata, Viewport } from "next";
 import Link from "next/link";
-import { Architects_Daughter, Atkinson_Hyperlegible, Permanent_Marker } from "next/font/google";
+import { Architects_Daughter, Atkinson_Hyperlegible, Barlow, Barlow_Condensed, Bricolage_Grotesque, IBM_Plex_Sans, Permanent_Marker } from "next/font/google";
+import { DesignSwitcher } from "@/components/DesignSwitcher";
 import { Logo, SketchDefs } from "@/components/Sketches";
 import { site, telHref } from "@/lib/site";
 import "./globals.css";
+import "./designs.css";
 
 const marker = Permanent_Marker({ weight: "400", subsets: ["latin"], variable: "--font-marker", display: "swap" });
 const hand = Architects_Daughter({ weight: "400", subsets: ["latin"], variable: "--font-hand", display: "swap" });
+// Hi-vis design
+const condensed = Barlow_Condensed({ weight: ["700", "800"], subsets: ["latin"], variable: "--font-condensed", display: "swap" });
+const barlow = Barlow({ weight: ["400", "600"], subsets: ["latin"], variable: "--font-barlow", display: "swap" });
+// Paddock design
+const bricolage = Bricolage_Grotesque({ weight: ["500", "700"], subsets: ["latin"], variable: "--font-bricolage", display: "swap" });
+const plex = IBM_Plex_Sans({ weight: ["400", "600"], subsets: ["latin"], variable: "--font-plex", display: "swap" });
 const body = Atkinson_Hyperlegible({ weight: ["400", "700"], style: ["normal", "italic"], subsets: ["latin"], variable: "--font-body", display: "swap" });
 
 export const metadata: Metadata = {
@@ -26,8 +34,16 @@ export const viewport: Viewport = {
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   const year = new Date().getFullYear();
   return (
-    <html lang="en-GB">
-      <body className={`${marker.variable} ${hand.variable} ${body.variable}`}>
+    <html lang="en-GB" suppressHydrationWarning>
+      <head>
+        {/* Applies the chosen design before first paint. Remove with DesignSwitcher once a design is picked. */}
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `(function(){try{var q=new URLSearchParams(location.search).get("design");var s=localStorage.getItem("tt-design");var d=q||s||"sketch";if(["sketch","hivis","paddock"].indexOf(d)<0)d="sketch";document.documentElement.dataset.design=d;if(q)localStorage.setItem("tt-design",q);}catch(e){}})();`,
+          }}
+        />
+      </head>
+      <body className={`${marker.variable} ${hand.variable} ${body.variable} ${condensed.variable} ${barlow.variable} ${bricolage.variable} ${plex.variable}`}>
         <SketchDefs />
         <a className="skip" href="#main">Skip to content</a>
         <header className="nav">
@@ -62,6 +78,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             <span className="small">Copyright {year} {site.name}</span>
           </div>
         </footer>
+        <DesignSwitcher />
       </body>
     </html>
   );
