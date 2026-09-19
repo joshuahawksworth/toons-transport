@@ -33,94 +33,110 @@ const stroke = {
 } as const;
 
 interface VanSketchProps extends SVGProps<SVGSVGElement> {
-  /** Adds the road, motion lines, weather and margin notes for the hero. */
+  /** Adds the road, weather and margin notes for the hero. */
   detailed?: boolean;
   /** Animates the strokes drawing themselves in. */
   draw?: boolean;
 }
 
-/**
- * The logo mark: the Toon Transport van, side on, drawn as a cutaway so you
- * can see the customer's bike strapped down inside.
- */
-export function VanSketch({ detailed = false, draw = false, ...rest }: VanSketchProps) {
+/** A side-on naked bike, facing left. Front wheel centre at the origin, tyres on y = 20. */
+function Bike() {
+  return (
+    <>
+      {/* tyres, rims, hubs */}
+      <circle cx="0" cy="0" r="20" strokeWidth="4.5" />
+      <circle cx="0" cy="0" r="12" strokeWidth="1.6" />
+      <circle cx="0" cy="0" r="3" fill="currentColor" />
+      <circle cx="84" cy="0" r="20" strokeWidth="4.5" />
+      <circle cx="84" cy="0" r="12" strokeWidth="1.6" />
+      <circle cx="84" cy="0" r="3" fill="currentColor" />
+      {/* forks raked back, front mudguard, headlight, bars */}
+      <path d="M-1 -2 L9 -48" strokeWidth="4" />
+      <path d="M-19 -9 A 21 21 0 0 1 15 -14" strokeWidth="2.4" />
+      <circle cx="-7" cy="-44" r="6" strokeWidth="2.2" />
+      <path d="M9 -48 L4 -55 M4 -55 L22 -50" strokeWidth="3" />
+      {/* one line from the tank over the seat to the tail */}
+      <path d="M12 -46 C 20 -68, 50 -70, 60 -50 L 90 -50 C 102 -50, 106 -40, 100 -34 L 66 -36 L 60 -44 L 12 -42 Z" fill="url(#hatch)" strokeWidth="2.6" />
+      {/* frame spine, engine, exhaust */}
+      <path d="M12 -44 L60 -14" strokeWidth="2.6" />
+      <path d="M30 -30 h24 q4 0 4 4 v16 q0 4 -4 4 h-24 q-4 0 -4 -4 v-16 q0 -4 4 -4 z" fill="url(#hatch)" strokeWidth="2.2" />
+      <path d="M32 -20 Q 12 -6, 40 -4 L 64 -6" strokeWidth="2.2" />
+      <path d="M62 -6 L 98 -14" strokeWidth="7" />
+      {/* shock and swingarm */}
+      <path d="M68 -36 L74 -14" strokeWidth="3" />
+      <path d="M60 -14 L84 0" strokeWidth="3.4" />
+    </>
+  );
+}
+
+interface VanSketchProps extends SVGProps<SVGSVGElement> {
+  /** Animates the strokes drawing themselves in. */
+  draw?: boolean;
+}
+
+/** The hero drawing: the van with the ramp down and the customer's bike waiting behind it. */
+export function VanSketch({ draw = false, ...rest }: VanSketchProps) {
   const g = draw ? "sketch-draw" : undefined;
   const p = (i: number) => ({ style: { ["--i" as string]: i } });
   return (
-    <svg viewBox={detailed ? "0 0 320 176" : "14 34 282 106"} role="img" aria-label="A sketched van, drawn as a cutaway, with a motorbike strapped down inside" {...rest}>
+    <svg viewBox="0 0 470 176" role="img" aria-label="A sketched van with its ramp down and a motorbike waiting behind it" {...rest}>
       <g filter="url(#wobble)" className={g} {...stroke}>
-        {detailed && (
-          <>
-            {/* road */}
-            <path d="M6 140 Q 80 136 160 140 T 314 139" strokeWidth="2" {...p(0)} />
-            <path d="M30 150 L54 150 M78 150 L102 150 M126 150 L150 150 M174 150 L198 150 M222 150 L246 150 M270 150 L292 150" strokeWidth="1.6" className="pencil" {...p(1)} />
-            {/* motion lines */}
-            <path d="M4 70 L16 70 M0 84 L16 84 M4 98 L16 98" strokeWidth="2" className="pencil" {...p(2)} />
-            {/* a bit of weather, because it's the UK */}
-            <path d="M244 14 q 6 -12 18 -6 q 6 -10 18 -4 q 12 -2 12 8 q 6 4 0 8 H 246 q -8 -2 -2 -6" strokeWidth="1.8" className="pencil" {...p(3)} />
-            <path d="M262 28 l -3 6 M272 28 l -3 6 M282 28 l -3 6" strokeWidth="1.6" className="pencil" {...p(3)} />
-          </>
-        )}
+        {/* road, straight under the wheels */}
+        <path d="M6 141 H464" strokeWidth="2" {...p(0)} />
+        <path d="M30 152 H54 M78 152 H102 M126 152 H150 M174 152 H198 M222 152 H246 M270 152 H294 M318 152 H342 M366 152 H390 M414 152 H438" strokeWidth="1.6" className="pencil" {...p(1)} />
+        {/* a bit of weather, because it's the UK */}
+        <path d="M196 14 q 6 -12 18 -6 q 6 -10 18 -4 q 12 -2 12 8 q 6 4 0 8 H 198 q -8 -2 -2 -6" strokeWidth="1.8" className="pencil" {...p(2)} />
+        <path d="M214 28 l -3 6 M224 28 l -3 6 M234 28 l -3 6" strokeWidth="1.6" className="pencil" {...p(2)} />
 
-        {/* van body: rear box, sloping windscreen, short bonnet */}
-        <path d="M22 122 V50 Q22 40 32 40 H196 L234 74 H276 Q290 74 290 92 V122 Z" {...p(4)} />
-        {/* roof rail and the line where the cargo box meets the cab */}
-        <path d="M32 46 H192" strokeWidth="1.4" className="pencil" {...p(5)} />
-        <path d="M166 44 V120" strokeWidth="1.8" {...p(5)} />
-        <path d="M172 86 h10" strokeWidth="2" {...p(5)} />
-        {/* door window, narrow at the top where the pillar leans back */}
-        <path d="M172 50 H204 L228 72 H172 Z" fill="url(#hatch-blue)" {...p(6)} />
+        {/* van body, cab on the left: bonnet, windscreen, long roof, square back */}
+        <path d="M300 122 V50 Q300 40 290 40 H130 L92 74 H46 Q32 74 32 90 V122 Z" {...p(4)} />
+        <path d="M138 46 H288" strokeWidth="1.4" className="pencil" {...p(5)} />
+        {/* cab door and its window, narrow at the top where the pillar leans */}
+        <path d="M160 44 V120" strokeWidth="1.8" {...p(5)} />
+        <path d="M156 50 H124 L98 72 H156 Z" fill="url(#hatch-blue)" {...p(6)} />
+        <path d="M146 86 h10" strokeWidth="2" {...p(5)} />
         {/* mirror, headlight, bumper */}
-        <path d="M232 60 h8 v10 h-8 z" strokeWidth="1.8" {...p(6)} />
-        <path d="M282 88 q 6 0 6 6 v 6 h -8 z" fill="var(--marker)" strokeWidth="1.6" {...p(6)} />
-        <path d="M262 122 H292" strokeWidth="3" {...p(6)} />
-        {/* wheel arches and wheels */}
-        <path d="M50 122 a 18 18 0 0 1 36 0 M226 122 a 18 18 0 0 1 36 0" {...p(7)} />
-        <circle cx="68" cy="126" r="15" {...p(8)} />
-        <circle cx="68" cy="126" r="6" fill="url(#hatch)" {...p(8)} />
-        <circle cx="244" cy="126" r="15" {...p(8)} />
-        <circle cx="244" cy="126" r="6" fill="url(#hatch)" {...p(8)} />
-        <path d="M86 122 H226" strokeWidth="2" {...p(8)} />
+        <path d="M84 60 h8 v10 h-8 z" strokeWidth="1.8" {...p(6)} />
+        <path d="M40 88 q -6 0 -6 6 v 6 h 8 z" fill="var(--marker)" strokeWidth="1.6" {...p(6)} />
+        <path d="M30 122 H60" strokeWidth="3" {...p(6)} />
+        {/* rear door edge and handle */}
+        <path d="M292 52 V118" strokeWidth="1.4" className="pencil" {...p(5)} />
+        <path d="M286 84 v8" strokeWidth="2" {...p(5)} />
+        {/* wheel arches, wheels sitting on the road at y = 141 */}
+        <path d="M60 122 a 18 18 0 0 1 36 0 M228 122 a 18 18 0 0 1 36 0" {...p(7)} />
+        <circle cx="78" cy="126" r="15" {...p(8)} />
+        <circle cx="78" cy="126" r="6" fill="url(#hatch)" {...p(8)} />
+        <circle cx="246" cy="126" r="15" {...p(8)} />
+        <circle cx="246" cy="126" r="6" fill="url(#hatch)" {...p(8)} />
+        <path d="M96 122 H228 M264 122 H300" strokeWidth="2" {...p(8)} />
 
-        {/* the cutaway: the bike inside the cargo box */}
-        <g transform="translate(10 -3)" {...p(9)}>
-          {/* wheels with tyres */}
-          <circle cx="58" cy="102" r="14" strokeWidth="3" />
-          <circle cx="58" cy="102" r="7" fill="url(#hatch)" strokeWidth="1.6" />
-          <circle cx="128" cy="102" r="14" strokeWidth="3" />
-          <circle cx="128" cy="102" r="7" fill="url(#hatch)" strokeWidth="1.6" />
-        </g>
-        <g transform="translate(10 -3)" {...p(10)}>
-          {/* swingarm, frame, forks */}
-          <path d="M58 102 L88 96" />
-          <path d="M88 96 L96 70 L118 64" />
-          <path d="M118 64 L128 102" strokeWidth="3" />
-          {/* rear shock */}
-          <path d="M84 84 L92 70" strokeWidth="1.8" />
-          {/* tank and seat */}
-          <path d="M96 70 Q104 56 120 64" fill="url(#hatch)" />
-          <path d="M96 70 L72 74 Q74 66 96 66" fill="url(#hatch)" />
-          {/* engine */}
-          <path d="M92 78 h18 q4 0 4 4 v10 h-24 v-10 q0 -4 2 -4 z" fill="url(#hatch)" />
-          {/* exhaust */}
-          <path d="M112 92 q10 8 -6 12 L70 106" strokeWidth="2" />
-          {/* bars, headlight, mudguard */}
-          <path d="M118 64 L114 54 M108 54 L124 51" />
-          <circle cx="126" cy="60" r="3" strokeWidth="1.6" />
-          <path d="M116 92 a 14 14 0 0 1 24 -4" strokeWidth="1.8" />
-        </g>
-        {/* tie-down straps */}
-        <path d="M98 93 L88 118 M122 77 L150 118" strokeWidth="1.6" strokeDasharray="4 4" className="pencil" {...p(11)} />
+        {/* the ramp, down and ready */}
+        <path d="M302 116 L338 141 M302 121 L336 145" strokeWidth="2" {...p(9)} />
 
-        {detailed && (
-          <g className="note" fontFamily="var(--font-hand)" fontSize="15" fill="currentColor" stroke="none" {...p(12)}>
-            <text x="38" y="24">your bike, strapped in</text>
-            <path d="M84 28 q 6 14 4 22" {...stroke} strokeWidth="1.6" className="pencil" />
-            <text x="212" y="46">us</text>
-            <path d="M212 48 q -6 6 -2 12" {...stroke} strokeWidth="1.6" className="pencil" />
-            <text x="14" y="170">fig. 1 - the van, cutaway view</text>
-          </g>
-        )}
+        {/* the bike, waiting on the road behind the van */}
+        <g transform="translate(356 121)" {...p(10)}>
+          <Bike />
+        </g>
+
+        <g className="note" fontFamily="var(--font-hand)" fontSize="15" fill="currentColor" stroke="none" {...p(12)}>
+          <text x="372" y="28">your bike</text>
+          <path d="M392 32 q 2 10 -4 20" {...stroke} strokeWidth="1.6" className="pencil" />
+          <text x="60" y="30">us</text>
+          <path d="M78 26 q 22 -6 30 10" {...stroke} strokeWidth="1.6" className="pencil" />
+          <text x="14" y="170">fig. 1 - loading up</text>
+        </g>
+      </g>
+    </svg>
+  );
+}
+
+/** The official mark: two T's in a box. Same drawing as the favicon. */
+export function Mark(props: SVGProps<SVGSVGElement>) {
+  return (
+    <svg viewBox="0 0 48 48" role="img" aria-label="Toon Transport" {...props}>
+      <g filter="url(#wobble)" fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round">
+        <rect x="3" y="3" width="42" height="42" rx="4" strokeWidth="2.4" />
+        <path d="M8 14 H22 M15 14 V36 M26 14 H40 M33 14 V36" strokeWidth="5" />
       </g>
     </svg>
   );
@@ -130,7 +146,7 @@ export function VanSketch({ detailed = false, draw = false, ...rest }: VanSketch
 export function Logo({ compact = false }: { compact?: boolean }) {
   return (
     <span className={`logo${compact ? " logo-compact" : ""}`}>
-      <VanSketch className="logo-mark" />
+      <Mark className="logo-mark" />
       <span className="logo-word">
         Toon<span className="logo-word-2">Transport</span>
       </span>

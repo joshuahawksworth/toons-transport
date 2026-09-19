@@ -11,6 +11,7 @@ export default function Home() {
           <p className="eyebrow">Motorbike recovery and transport, UK wide</p>
           <h1 className="h-marker">
             Broken down?
+            <br />
             <span className="hi">We&rsquo;ll pick you up.</span>
           </h1>
           <p className="lead">
@@ -28,7 +29,7 @@ export default function Home() {
           </ul>
         </div>
         <figure className="hero-art">
-          <VanSketch detailed draw className="hero-svg" />
+          <VanSketch draw className="hero-svg" />
         </figure>
       </section>
 

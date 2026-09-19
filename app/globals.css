@@ -73,7 +73,7 @@ strong { font-weight: 700; }
 .mono { font-family: ui-monospace, "SF Mono", Menlo, Consolas, monospace; font-size: 0.95em; letter-spacing: 0.02em; }
 .small { font-size: 0.9rem; color: var(--pencil); }
 
-.h-marker { font-family: var(--font-marker); font-size: clamp(2.3rem, 6.2vw, 4.3rem); line-height: 1.04; letter-spacing: -0.01em; }
+.h-marker { font-family: var(--font-marker); font-size: clamp(2.3rem, 6.2vw, 4.3rem); line-height: 1.1; letter-spacing: -0.01em; }
 .h-hand { font-family: var(--font-hand); font-size: clamp(1.9rem, 4vw, 2.6rem); }
 .eyebrow {
   font-family: var(--font-hand);
@@ -87,13 +87,11 @@ strong { font-weight: 700; }
 
 /* highlighter swipe */
 .hi {
-  display: block;
-  width: fit-content;
-  max-width: 100%;
-  margin-top: 0.12em;
-  padding: 0.04em 0.18em 0.02em;
-  line-height: 1.15;
-  background: linear-gradient(100deg, transparent 1%, var(--marker) 3%, var(--marker) 96%, transparent 98%);
+  /* a highlighter swipe through the text: a band shorter than the line, so it
+     never reaches the line above, cloned onto each wrapped line */
+  background: linear-gradient(var(--marker), var(--marker)) 0 62% / 100% 0.72em no-repeat;
+  padding: 0 0.14em;
+  margin: 0 -0.1em;
   -webkit-box-decoration-break: clone;
   box-decoration-break: clone;
   color: #22252b;
@@ -159,10 +157,10 @@ strong { font-weight: 700; }
 
 /* ---------- logo ---------- */
 .logo { display: inline-flex; align-items: center; gap: 10px; color: var(--ink); }
-.logo-mark { width: 64px; height: auto; flex: none; }
+.logo-mark { width: 44px; height: auto; flex: none; }
 .logo-word { font-family: var(--font-marker); font-size: 1.55rem; line-height: 1; display: flex; flex-direction: column; }
 .logo-word-2 { font-size: 0.72em; letter-spacing: 0.08em; text-transform: uppercase; color: var(--blue); }
-.logo-compact .logo-mark { width: 54px; }
+.logo-compact .logo-mark { width: 40px; }
 .logo-compact .logo-word { font-size: 1.3rem; }
 
 /* ---------- hero ---------- */
