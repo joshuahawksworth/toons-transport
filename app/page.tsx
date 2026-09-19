@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { BookingForm } from "@/components/BookingForm";
-import { Icon, Rule, TruckSketch } from "@/components/Sketches";
+import { Icon, Rule, VanSketch } from "@/components/Sketches";
 import { site, telHref } from "@/lib/site";
 
 export default function Home() {
@@ -10,10 +10,11 @@ export default function Home() {
         <div className="hero-copy">
           <p className="eyebrow">Motorbike recovery and transport, UK wide</p>
           <h1 className="h-marker">
-            Broken down? <span className="hi">We&rsquo;ll pick you up.</span>
+            Broken down?
+            <span className="hi">We&rsquo;ll pick you up.</span>
           </h1>
           <p className="lead">
-            We collect bikes that won&rsquo;t go, fix them, and bring them back. We&rsquo;ll also run your track bike to the circuit and home again.
+            We collect bikes that won&rsquo;t go and take them wherever they need to be: home, a garage, a dealer, or the paddock at your next track day.
           </p>
           <div className="btn-row">
             <Link href="#book" className="btn btn-primary btn-lg">Book a pickup</Link>
@@ -23,11 +24,11 @@ export default function Home() {
           <ul className="margin-notes" aria-label="Quick facts">
             <li>any bike, any state</li>
             <li>price agreed before we set off</li>
-            <li>a mechanic drives the van</li>
+            <li>photos when it&rsquo;s loaded</li>
           </ul>
         </div>
         <figure className="hero-art">
-          <TruckSketch detailed draw className="hero-svg" />
+          <VanSketch detailed draw className="hero-svg" />
         </figure>
       </section>
 
@@ -39,16 +40,8 @@ export default function Home() {
             <span className="parts-icon"><Icon name="van" /></span>
             <div>
               <h3>Breakdown recovery</h3>
-              <p>Stuck at the roadside? We come out, strap the bike down properly and take you both home or to the workshop.</p>
+              <p>Stuck at the roadside? We come out, strap the bike down properly and take you both home or to a garage of your choice.</p>
               <Link href="#book?job=recovery" className="book-link">Book recovery</Link>
-            </div>
-          </li>
-          <li>
-            <span className="parts-icon"><Icon name="wrench" /></span>
-            <div>
-              <h3>Repairs</h3>
-              <p>Won&rsquo;t start, electrics, brakes, chains, servicing. Written quote before we touch anything.</p>
-              <Link href="#book?job=repair" className="book-link">Book a repair</Link>
             </div>
           </li>
           <li>
@@ -102,7 +95,7 @@ export default function Home() {
             <span className="route-stop">3</span>
             <div>
               <h3>Loaded and delivered</h3>
-              <p>Photos when it&rsquo;s on the van. Repairs quoted in writing before we start.</p>
+              <p>Photos when it&rsquo;s on the van, and a message when it&rsquo;s dropped off.</p>
             </div>
           </li>
         </ol>

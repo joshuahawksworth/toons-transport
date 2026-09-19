@@ -46,7 +46,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           <div className="footer-brand">
             <Logo />
             <p className="footer-slogan">{site.slogan}</p>
-            <p className="small">Motorbike recovery, transport and repair across the UK.</p>
+            <p className="small">Motorbike recovery and transport across the UK. We move bikes, we don&rsquo;t fix them.</p>
           </div>
           <div className="footer-col">
             <p className="eyebrow">Get in touch</p>

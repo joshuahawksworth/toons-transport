@@ -32,84 +32,93 @@ const stroke = {
   strokeLinejoin: "round",
 } as const;
 
-interface TruckSketchProps extends SVGProps<SVGSVGElement> {
-  /** Adds the ground, motion lines and margin notes for the hero. */
+interface VanSketchProps extends SVGProps<SVGSVGElement> {
+  /** Adds the road, motion lines, weather and margin notes for the hero. */
   detailed?: boolean;
   /** Animates the strokes drawing themselves in. */
   draw?: boolean;
 }
 
 /**
- * The logo mark: a broken-down bike (note the plaster on the tank) strapped
- * onto the back of the Toon Transport pickup, ready to go.
+ * The logo mark: the Toon Transport van, side on, drawn as a cutaway so you
+ * can see the customer's bike strapped down inside.
  */
-export function TruckSketch({ detailed = false, draw = false, ...rest }: TruckSketchProps) {
+export function VanSketch({ detailed = false, draw = false, ...rest }: VanSketchProps) {
   const g = draw ? "sketch-draw" : undefined;
   const p = (i: number) => ({ style: { ["--i" as string]: i } });
   return (
-    <svg viewBox={detailed ? "0 0 300 170" : "18 30 222 90"} role="img" aria-label="A sketched pickup truck carrying a motorbike with a plaster on its fuel tank" {...rest}>
+    <svg viewBox={detailed ? "0 0 320 176" : "14 34 282 106"} role="img" aria-label="A sketched van, drawn as a cutaway, with a motorbike strapped down inside" {...rest}>
       <g filter="url(#wobble)" className={g} {...stroke}>
         {detailed && (
           <>
             {/* road */}
-            <path d="M6 128 Q 70 124 140 128 T 292 127" strokeWidth="2" {...p(0)} />
-            <path d="M24 138 L48 138 M70 138 L94 138 M118 138 L142 138 M166 138 L190 138 M214 138 L238 138 M260 138 L280 138" strokeWidth="1.6" className="pencil" {...p(1)} />
+            <path d="M6 140 Q 80 136 160 140 T 314 139" strokeWidth="2" {...p(0)} />
+            <path d="M30 150 L54 150 M78 150 L102 150 M126 150 L150 150 M174 150 L198 150 M222 150 L246 150 M270 150 L292 150" strokeWidth="1.6" className="pencil" {...p(1)} />
             {/* motion lines */}
-            <path d="M10 88 L28 88 M4 98 L26 98 M10 108 L28 108" strokeWidth="2" className="pencil" {...p(2)} />
+            <path d="M4 70 L16 70 M0 84 L16 84 M4 98 L16 98" strokeWidth="2" className="pencil" {...p(2)} />
             {/* a bit of weather, because it's the UK */}
-            <path d="M212 26 q 6 -12 18 -6 q 6 -10 18 -4 q 12 -2 12 8 q 6 4 0 8 H 214 q -8 -2 -2 -6" strokeWidth="1.8" className="pencil" {...p(3)} />
-            <path d="M230 40 l -3 6 M240 40 l -3 6 M250 40 l -3 6" strokeWidth="1.6" className="pencil" {...p(3)} />
+            <path d="M244 14 q 6 -12 18 -6 q 6 -10 18 -4 q 12 -2 12 8 q 6 4 0 8 H 246 q -8 -2 -2 -6" strokeWidth="1.8" className="pencil" {...p(3)} />
+            <path d="M262 28 l -3 6 M272 28 l -3 6 M282 28 l -3 6" strokeWidth="1.6" className="pencil" {...p(3)} />
           </>
         )}
 
-        {/* flatbed */}
-        <path d="M30 84 L172 84 L172 96 L30 96 Z" {...p(4)} />
-        <path d="M30 84 L172 84 L172 96 L30 96 Z" fill="url(#hatch)" stroke="none" {...p(4)} />
-        {/* cab */}
-        <path d="M172 96 L172 60 L204 60 L226 80 L236 96 Z" {...p(5)} />
-        <path d="M178 65 L202 65 L218 80 L178 80 Z" fill="url(#hatch-blue)" {...p(6)} />
-        <path d="M226 80 L236 82 L238 96" {...p(6)} />
-        <circle cx="230" cy="89" r="2.6" fill="var(--marker)" strokeWidth="1.6" {...p(6)} />
-        {/* wheel arches + wheels */}
-        <path d="M44 96 a 18 18 0 0 1 36 0 M190 96 a 18 18 0 0 1 36 0" {...p(7)} />
-        <circle cx="62" cy="104" r="14" {...p(8)} />
-        <circle cx="62" cy="104" r="5" fill="url(#hatch)" {...p(8)} />
-        <circle cx="208" cy="104" r="14" {...p(8)} />
-        <circle cx="208" cy="104" r="5" fill="url(#hatch)" {...p(8)} />
-        {/* underside line */}
-        <path d="M78 104 L192 104" strokeWidth="2" {...p(8)} />
+        {/* van body: rear box, sloping windscreen, short bonnet */}
+        <path d="M22 122 V50 Q22 40 32 40 H196 L234 74 H276 Q290 74 290 92 V122 Z" {...p(4)} />
+        {/* roof rail and the line where the cargo box meets the cab */}
+        <path d="M32 46 H192" strokeWidth="1.4" className="pencil" {...p(5)} />
+        <path d="M166 44 V120" strokeWidth="1.8" {...p(5)} />
+        <path d="M172 86 h10" strokeWidth="2" {...p(5)} />
+        {/* door window, narrow at the top where the pillar leans back */}
+        <path d="M172 50 H204 L228 72 H172 Z" fill="url(#hatch-blue)" {...p(6)} />
+        {/* mirror, headlight, bumper */}
+        <path d="M232 60 h8 v10 h-8 z" strokeWidth="1.8" {...p(6)} />
+        <path d="M282 88 q 6 0 6 6 v 6 h -8 z" fill="var(--marker)" strokeWidth="1.6" {...p(6)} />
+        <path d="M262 122 H292" strokeWidth="3" {...p(6)} />
+        {/* wheel arches and wheels */}
+        <path d="M50 122 a 18 18 0 0 1 36 0 M226 122 a 18 18 0 0 1 36 0" {...p(7)} />
+        <circle cx="68" cy="126" r="15" {...p(8)} />
+        <circle cx="68" cy="126" r="6" fill="url(#hatch)" {...p(8)} />
+        <circle cx="244" cy="126" r="15" {...p(8)} />
+        <circle cx="244" cy="126" r="6" fill="url(#hatch)" {...p(8)} />
+        <path d="M86 122 H226" strokeWidth="2" {...p(8)} />
 
-        {/* the bike on the bed */}
-        <circle cx="66" cy="70" r="14" {...p(9)} />
-        <circle cx="66" cy="70" r="4" fill="url(#hatch)" {...p(9)} />
-        <circle cx="128" cy="70" r="14" {...p(9)} />
-        <circle cx="128" cy="70" r="4" fill="url(#hatch)" {...p(9)} />
-        {/* front forks + bars */}
-        <path d="M128 70 L118 40 M114 38 L128 32" {...p(10)} />
-        {/* frame, tank, seat */}
-        <path d="M118 44 L96 42 L84 62 L66 70 M96 42 L74 44 L72 52" {...p(10)} />
-        <path d="M96 42 L104 34 L116 40" fill="url(#hatch)" {...p(10)} />
-        {/* engine + exhaust */}
-        <path d="M90 54 h16 v12 h-16 z" fill="url(#hatch)" {...p(11)} />
-        <path d="M100 66 q -10 8 -28 6" strokeWidth="2" {...p(11)} />
-        {/* tie-down straps */}
-        <path d="M84 60 L72 84 M112 56 L136 84" strokeWidth="1.6" strokeDasharray="4 4" className="pencil" {...p(12)} />
-        {/* the plaster on the tank */}
-        <g className="red" {...p(13)}>
-          <path d="M100 30 L112 42" strokeWidth="5" />
-          <path d="M112 30 L100 42" strokeWidth="5" />
-          <path d="M100 30 L112 42 M112 30 L100 42" strokeWidth="1.2" stroke="var(--paper)" />
+        {/* the cutaway: the bike inside the cargo box */}
+        <g transform="translate(10 -3)" {...p(9)}>
+          {/* wheels with tyres */}
+          <circle cx="58" cy="102" r="14" strokeWidth="3" />
+          <circle cx="58" cy="102" r="7" fill="url(#hatch)" strokeWidth="1.6" />
+          <circle cx="128" cy="102" r="14" strokeWidth="3" />
+          <circle cx="128" cy="102" r="7" fill="url(#hatch)" strokeWidth="1.6" />
         </g>
-        {/* the little sweat drop: it's had a rough day */}
-        <path d="M134 26 q 4 6 0 8 q -4 -2 0 -8" strokeWidth="1.6" className="blue" fill="var(--blue)" {...p(13)} />
+        <g transform="translate(10 -3)" {...p(10)}>
+          {/* swingarm, frame, forks */}
+          <path d="M58 102 L88 96" />
+          <path d="M88 96 L96 70 L118 64" />
+          <path d="M118 64 L128 102" strokeWidth="3" />
+          {/* rear shock */}
+          <path d="M84 84 L92 70" strokeWidth="1.8" />
+          {/* tank and seat */}
+          <path d="M96 70 Q104 56 120 64" fill="url(#hatch)" />
+          <path d="M96 70 L72 74 Q74 66 96 66" fill="url(#hatch)" />
+          {/* engine */}
+          <path d="M92 78 h18 q4 0 4 4 v10 h-24 v-10 q0 -4 2 -4 z" fill="url(#hatch)" />
+          {/* exhaust */}
+          <path d="M112 92 q10 8 -6 12 L70 106" strokeWidth="2" />
+          {/* bars, headlight, mudguard */}
+          <path d="M118 64 L114 54 M108 54 L124 51" />
+          <circle cx="126" cy="60" r="3" strokeWidth="1.6" />
+          <path d="M116 92 a 14 14 0 0 1 24 -4" strokeWidth="1.8" />
+        </g>
+        {/* tie-down straps */}
+        <path d="M98 93 L88 118 M122 77 L150 118" strokeWidth="1.6" strokeDasharray="4 4" className="pencil" {...p(11)} />
 
         {detailed && (
-          <g className="note" fontFamily="var(--font-hand)" fontSize="15" fill="currentColor" stroke="none" {...p(14)}>
-            <text x="150" y="20">your bike</text>
-            <path d="M156 24 q 10 12 -8 18" {...stroke} strokeWidth="1.6" className="pencil" />
-            <text x="252" y="66">us</text>
-            <path d="M250 62 q -12 -4 -14 6" {...stroke} strokeWidth="1.6" className="pencil" />
-            <text x="12" y="160">fig. 1 - recovery in progress</text>
+          <g className="note" fontFamily="var(--font-hand)" fontSize="15" fill="currentColor" stroke="none" {...p(12)}>
+            <text x="38" y="24">your bike, strapped in</text>
+            <path d="M84 28 q 6 14 4 22" {...stroke} strokeWidth="1.6" className="pencil" />
+            <text x="212" y="46">us</text>
+            <path d="M212 48 q -6 6 -2 12" {...stroke} strokeWidth="1.6" className="pencil" />
+            <text x="14" y="170">fig. 1 - the van, cutaway view</text>
           </g>
         )}
       </g>
@@ -121,7 +130,7 @@ export function TruckSketch({ detailed = false, draw = false, ...rest }: TruckSk
 export function Logo({ compact = false }: { compact?: boolean }) {
   return (
     <span className={`logo${compact ? " logo-compact" : ""}`}>
-      <TruckSketch className="logo-mark" />
+      <VanSketch className="logo-mark" />
       <span className="logo-word">
         Toon<span className="logo-word-2">Transport</span>
       </span>

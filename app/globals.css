@@ -1,4 +1,4 @@
-/* ---------- tokens: a mechanic's sketchbook ---------- */
+/* ---------- tokens: a sketchbook on the van's dashboard ---------- */
 :root {
   color-scheme: light;
   --paper: #f1f0eb;        /* cool cartridge paper */
@@ -7,7 +7,6 @@
   --pencil: #6b6f78;       /* lighter graphite for notes */
   --blue: #2f55a4;         /* ballpoint */
   --marker: #ffe24d;       /* the one highlighter in the drawer */
-  --red: #c9432f;          /* red pencil, used only for the plaster */
   --focus: #2f55a4;
 
   /* --font-marker, --font-hand and --font-body are set on <body> by next/font */
@@ -27,8 +26,7 @@
     --pencil: #9a9ea8;
     --blue: #93ace9;
     --marker: #e2c53c;
-    --red: #e06552;
-    --focus: #93ace9;
+      --focus: #93ace9;
   }
 }
 :root[data-theme="dark"] {
@@ -39,7 +37,6 @@
   --pencil: #9a9ea8;
   --blue: #93ace9;
   --marker: #e2c53c;
-  --red: #e06552;
   --focus: #93ace9;
 }
 
@@ -90,9 +87,13 @@ strong { font-weight: 700; }
 
 /* highlighter swipe */
 .hi {
+  display: block;
+  width: fit-content;
+  max-width: 100%;
+  margin-top: 0.12em;
+  padding: 0.04em 0.18em 0.02em;
+  line-height: 1.15;
   background: linear-gradient(100deg, transparent 1%, var(--marker) 3%, var(--marker) 96%, transparent 98%);
-  padding: 0.05em 0.18em;
-  margin: 0 -0.1em;
   -webkit-box-decoration-break: clone;
   box-decoration-break: clone;
   color: #22252b;
@@ -104,7 +105,6 @@ strong { font-weight: 700; }
 /* sketch strokes inside SVGs */
 .pencil { color: var(--pencil); }
 .blue { color: var(--blue); }
-.red { color: var(--red); }
 .note { color: var(--pencil); }
 
 /* ---------- hand-drawn box helper ---------- */
@@ -205,8 +205,8 @@ strong { font-weight: 700; }
 
 /* the drawing draws itself */
 .sketch-draw :is(path, circle) {
-  stroke-dasharray: 620;
-  stroke-dashoffset: 620;
+  stroke-dasharray: 900;
+  stroke-dashoffset: 900;
   animation: draw 1.4s cubic-bezier(0.4, 0, 0.3, 1) forwards;
   animation-delay: calc(var(--i, 0) * 70ms);
 }
@@ -283,14 +283,16 @@ strong { font-weight: 700; }
 .parts-icon svg { width: 32px; height: 32px; }
 
 /* ---------- how it works: a route with stops ---------- */
-.route { list-style: none; margin: 0; padding: 0 0 0 8px; position: relative; max-width: 760px; }
-.route::before {
+.route { list-style: none; margin: 0; padding: 0 0 0 8px; max-width: 760px; }
+.route li { position: relative; display: grid; grid-template-columns: 40px minmax(0, 1fr); gap: 22px; padding: 12px 0 28px; }
+.route li:last-child { padding-bottom: 0; }
+/* dashed route from this stop's centre to the next stop's centre, so it ends at the last one */
+.route li:not(:last-child)::before {
   content: "";
   position: absolute;
-  left: 27px; top: 22px; bottom: 22px;
+  left: 19px; top: 32px; bottom: -32px;
   border-left: 2px dashed var(--pencil);
 }
-.route li { position: relative; display: grid; grid-template-columns: 40px minmax(0, 1fr); gap: 22px; padding: 12px 0 28px; }
 .route-stop {
   width: 40px; height: 40px;
   display: grid; place-items: center;

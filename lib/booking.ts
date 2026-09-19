@@ -1,4 +1,4 @@
-export type Job = "recovery" | "repair" | "transport" | "trackday" | "trade";
+export type Job = "recovery" | "transport" | "trackday" | "trade";
 export type Timing = "asap" | "date";
 
 export interface BookingInput {
@@ -26,13 +26,6 @@ export const JOBS: Record<Job, { label: string; pickup: string; dropoff: string;
     dropoff: "Where should it go? (optional)",
     details: "What's happened?",
     placeholder: "Cut out on the A1 near junction 45 and won't restart. It rolls fine.",
-  },
-  repair: {
-    label: "Repair",
-    pickup: "Where do we collect it?",
-    dropoff: "Return address, if different (optional)",
-    details: "What's wrong with it?",
-    placeholder: "Won't start after winter in the garage. Battery is new. Smells of petrol.",
   },
   transport: {
     label: "Transport",

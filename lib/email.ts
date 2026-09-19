@@ -4,7 +4,7 @@ const escapeHtml = (s: string) =>
   s.replace(/[&<>"']/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" })[c] as string);
 
 /**
- * Sends the booking to the workshop inbox through Resend's HTTP API.
+ * Sends the booking to the business inbox through Resend's HTTP API.
  * Returns false (without throwing) when email isn't configured so the
  * site still works before the keys are added.
  *
