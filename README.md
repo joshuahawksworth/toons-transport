@@ -32,3 +32,9 @@ All settings are environment variables. Add them in Vercel under Project > Setti
 3. If they are not set yet, the customer sees the same confirmation plus one-tap WhatsApp, email and call buttons with the booking already written out, so nothing gets lost while the inbox is being set up.
 
 A hidden honeypot field drops most bot submissions.
+
+## Comparing designs
+
+Three visual directions ship in the same build: `sketch` (default), `hivis` and `paddock`. The picker in the bottom-left corner swaps between them and remembers the choice in the browser. A link with `?design=hivis` or `?design=paddock` opens that design directly.
+
+Once a design is chosen, delete `components/DesignSwitcher.tsx`, the inline script and `<DesignSwitcher />` in `app/layout.tsx`, and the unused blocks in `app/designs.css`.
