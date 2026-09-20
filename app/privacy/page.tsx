@@ -11,7 +11,7 @@ export default function Privacy() {
       <p className="small">Last updated September 2026</p>
 
       <h2>What we collect</h2>
-      <p>When you fill in the booking form we collect your name, phone number, email address if you give one, the details of your bike, the pickup and drop-off locations and your description of the problem. If you ring or message us we keep the details you give us in the same way.</p>
+      <p>When you fill in the booking form we collect your name, phone number, email address if you give one, the details of your bike, the pickup and drop-off locations, the date you want and anything you tell us about the job. If you ring or message us we keep the details you give us in the same way.</p>
 
       <h2>Why we collect it</h2>
       <p>To arrange, carry out and invoice the job you have asked for, and to contact you about it. That is the lawful basis: carrying out a contract with you, or taking steps at your request before one exists. We do not use your details for marketing and we do not sell or share them with anyone except where needed to do the job, for example our insurer in the event of a claim.</p>

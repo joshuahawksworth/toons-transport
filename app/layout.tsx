@@ -51,22 +51,23 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           </Link>
           <nav aria-label="Main">
             <Link href="/#services">What we do</Link>
+            <Link href="/#van">The van</Link>
             <Link href="/#how">How it works</Link>
             <Link href="/#faq">Questions</Link>
           </nav>
-          <Link href="/#book" className="btn btn-primary nav-cta">Book a pickup</Link>
+          <Link href="/#book" className="btn btn-primary nav-cta">Book transport</Link>
         </header>
         <main id="main">{children}</main>
         <footer className="footer">
           <div className="footer-brand">
             <Logo />
             <p className="footer-slogan">{site.slogan}</p>
-            <p className="small">Motorbike recovery and transport across the UK. We move bikes, we don&rsquo;t fix them.</p>
+            <p className="small">Motorbike transport and logistics across the UK, with breakdown pickups where we can. We move bikes, we don&rsquo;t fix them.</p>
           </div>
           <div className="footer-col">
             <p className="eyebrow">Get in touch</p>
-            {site.phone ? <a href={telHref(site.phone)}>{site.phone}</a> : <span className="small">Use the booking form and we'll ring you.</span>}
-            {site.email && <a href={`mailto:${site.email}`}>{site.email}</a>}
+            {site.phone ? <a href={telHref(site.phone)}>Breakdowns: {site.phone}</a> : <span className="small">Use the booking form and we'll ring you.</span>}
+            {site.email && <a href={`mailto:${site.email}`}>Queries: {site.email}</a>}
             {site.whatsapp && <a href={`https://wa.me/${site.whatsapp}`}>WhatsApp</a>}
             <Link href="/#book">Booking form</Link>
           </div>
