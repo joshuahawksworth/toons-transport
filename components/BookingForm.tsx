@@ -2,6 +2,7 @@
 
 import { FormEvent, useEffect, useId, useState } from "react";
 import { bookingAsText, JOB_KEYS, JOBS, type BookingInput, type Job, type Timing } from "@/lib/booking";
+import { JOB_EVENT } from "./BookLink";
 import { Icon } from "./Sketches";
 
 type Status = { kind: "idle" } | { kind: "sending" } | { kind: "sent"; reference: string; delivered: boolean } | { kind: "error"; message: string };
@@ -33,15 +34,27 @@ export function BookingForm({ phone, whatsapp, email }: Props) {
   const id = (k: keyof BookingInput) => `booking-${k}`;
   const job = JOBS[form.job];
 
-  // Links like /#book?job=trackday (from the services list) pre-select the job.
+  // Pre-select the job from a link: /?job=trackday#book (or the older #book?job=trackday),
+  // and from BookLink clicks on the same page, which fire JOB_EVENT.
   useEffect(() => {
-    const pick = () => {
-      const m = window.location.hash.match(/job=([a-z]+)/);
-      if (m && JOB_KEYS.includes(m[1] as Job)) setForm((f) => ({ ...f, job: m[1] as Job }));
+    const choose = (job: string | null | undefined) => {
+      if (job && JOB_KEYS.includes(job as Job)) setForm((f) => ({ ...f, job: job as Job }));
     };
-    pick();
-    window.addEventListener("hashchange", pick);
-    return () => window.removeEventListener("hashchange", pick);
+    const fromUrl = () => {
+      const fromSearch = new URLSearchParams(window.location.search).get("job");
+      const fromHash = window.location.hash.match(/job=([a-z]+)/)?.[1];
+      choose(fromSearch ?? fromHash);
+    };
+    const fromEvent = (e: Event) => choose((e as CustomEvent<string>).detail);
+    fromUrl();
+    window.addEventListener("hashchange", fromUrl);
+    window.addEventListener("popstate", fromUrl);
+    window.addEventListener(JOB_EVENT, fromEvent);
+    return () => {
+      window.removeEventListener("hashchange", fromUrl);
+      window.removeEventListener("popstate", fromUrl);
+      window.removeEventListener(JOB_EVENT, fromEvent);
+    };
   }, []);
 
   const set = <K extends keyof BookingInput>(k: K, v: BookingInput[K]) => {
