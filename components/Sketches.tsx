@@ -138,7 +138,7 @@ export function Logo({ compact = false, mark = true }: { compact?: boolean; mark
   );
 }
 
-type IconName = "wrench" | "van" | "house" | "tag" | "phone" | "clipboard" | "map" | "clock" | "shield" | "flag";
+type IconName = "wrench" | "van" | "house" | "tag" | "phone" | "clipboard" | "map" | "clock" | "shield" | "flag" | "camera" | "mail";
 
 const ICONS: Record<IconName, string> = {
   wrench: "M14 4 a6 6 0 0 0 -7 8 L3 16 l 3 3 l 4 -4 a6 6 0 0 0 8 -7 l -3 3 l -3 -1 l -1 -3 z",
@@ -151,6 +151,8 @@ const ICONS: Record<IconName, string> = {
   clock: "M12 3 a9 9 0 1 0 0.1 0 M12 7 v5 l3 3",
   shield: "M12 3 l8 3 v6 c0 5 -4 8 -8 9 c-4 -1 -8 -4 -8 -9 V6 z M9 12 l2 2 l4 -4",
   flag: "M5 21 V4 M5 4 h14 l-3 4 l3 4 H5 M9 4 v8 M13 4 v8 M5 8 h14",
+  camera: "M3 8 h4 l2 -3 h6 l2 3 h4 v11 H3 z M12 10 a3.5 3.5 0 1 0 0.1 0 M17 10 h1",
+  mail: "M3 6 h18 v12 H3 z M3 7 l9 6 l9 -6",
 };
 
 export function Icon({ name, ...rest }: { name: IconName } & SVGProps<SVGSVGElement>) {

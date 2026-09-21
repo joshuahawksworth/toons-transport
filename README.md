@@ -1,6 +1,6 @@
 # Toon Transport
 
-Marketing site and booking form for Toon Transport: motorbike recovery and transport across the UK. They move bikes; they do not repair them.
+Marketing site and booking form for Toon Transport: motorbike transport and logistics across the UK, with breakdown pickups where the van is free. They move bikes; they do not repair them.
 
 Built with Next.js (App Router), no UI framework. The sketch look is hand-drawn SVG plus CSS.
 
@@ -17,15 +17,17 @@ All settings are environment variables. Add them in Vercel under Project > Setti
 
 | Variable | What it does |
 | --- | --- |
-| `NEXT_PUBLIC_PHONE` | Phone number shown on the site, e.g. `07700 900123`. Leave unset to hide the call buttons. |
+| `NEXT_PUBLIC_PHONE` | The breakdown line, e.g. `07700 900123`. Shown in the hero, the contact card next to the form, and the footer. Leave unset to show "Number coming soon" and hide the call buttons. |
 | `NEXT_PUBLIC_WHATSAPP` | WhatsApp number with country code, digits only, e.g. `447700900123`. |
-| `NEXT_PUBLIC_EMAIL` | Public email address shown in the footer. |
+| `NEXT_PUBLIC_EMAIL` | Email for other queries. Shown in the contact card next to the form and in the footer. Leave unset to show "Address coming soon". |
 | `NEXT_PUBLIC_BASE_AREA` | Where the van is based, e.g. `West Yorkshire`. Used in the FAQ. |
 | `RESEND_API_KEY` | API key from [resend.com](https://resend.com). Turns on email delivery of bookings. |
 | `BOOKING_TO_EMAIL` | Inbox that receives booking requests. Comma-separate for more than one. |
 | `BOOKING_FROM_EMAIL` | Optional sender, e.g. `Toon Transport <bookings@yourdomain.co.uk>`. Needs a verified domain in Resend. Defaults to Resend's onboarding sender. |
 
 ## How bookings work
+
+The form is for pre-booked work only: bike transport, track day runs and trade jobs. Breakdowns are same-day, so the site points those at the phone number instead of the form.
 
 1. The form posts to `/api/booking`, which validates the fields and assigns a reference like `TT-260919-K7PQ`.
 2. If `RESEND_API_KEY` and `BOOKING_TO_EMAIL` are set, the booking is emailed to that inbox with the customer's email as reply-to.

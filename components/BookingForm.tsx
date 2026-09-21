@@ -13,14 +13,14 @@ interface Props {
 }
 
 const initial: BookingInput = {
-  job: "recovery",
+  job: "transport",
   name: "",
   phone: "",
   bike: "",
   pickup: "",
   dropoff: "",
   details: "",
-  timing: "asap",
+  timing: "date",
   date: "",
   website: "",
 };
@@ -80,7 +80,7 @@ export function BookingForm({ phone, whatsapp, email }: Props) {
         <div className="stamp">Received</div>
         <h3 className="h-hand">Cheers, {form.name.split(" ")[0]}. We&rsquo;ve got it.</h3>
         <p>
-          Reference <strong className="mono">{status.reference}</strong>. We&rsquo;ll ring <strong>{form.phone}</strong> with a price.
+          Reference <strong className="mono">{status.reference}</strong>. We&rsquo;ll ring <strong>{form.phone}</strong> with a price and a slot.
         </p>
         {!status.delivered && (
           <>
@@ -140,12 +140,12 @@ export function BookingForm({ phone, whatsapp, email }: Props) {
         <Icon name="clipboard" />
         <div>
           <p className="eyebrow">Job sheet</p>
-          <h3 className="h-hand">Book it</h3>
+          <h3 className="h-hand">Book it in</h3>
         </div>
       </div>
 
       <fieldset>
-        <legend>What do you need?</legend>
+        <legend>What are we moving it for?</legend>
         <div className="chips" role="radiogroup" aria-label="Type of job">
           {JOB_KEYS.map((k) => (
             <label key={k} className={`chip${form.job === k ? " chip-on" : ""}`}>
@@ -175,16 +175,16 @@ export function BookingForm({ phone, whatsapp, email }: Props) {
           <span className="label" id={`${uid}-when`}>When?</span>
           <div className="radio-row">
             <label className="radio">
-              <input type="radio" name="timing" value="asap" checked={form.timing === "asap"} onChange={() => set("timing", "asap" as Timing)} />
-              As soon as possible
+              <input type="radio" name="timing" value="date" checked={form.timing === "date"} onChange={() => set("timing", "date" as Timing)} />
+              On a date
             </label>
             <label className="radio">
-              <input type="radio" name="timing" value="date" checked={form.timing === "date"} onChange={() => set("timing", "date" as Timing)} />
-              Pick a date
+              <input type="radio" name="timing" value="flexible" checked={form.timing === "flexible"} onChange={() => set("timing", "flexible" as Timing)} />
+              Flexible, fit it round the route
             </label>
           </div>
         </div>
-        {form.timing === "date" && field("date", "Date", <input {...props("date")} type="date" min={new Date().toISOString().slice(0, 10)} value={form.date} onChange={(e) => set("date", e.target.value)} />)}
+        {form.timing === "date" && field("date", "Date", <input {...props("date")} type="date" min={new Date().toISOString().slice(0, 10)} value={form.date} onChange={(e) => set("date", e.target.value)} />, "Flexible on the day usually means a better price.")}
         {field("details", job.details, <textarea {...props("details")} rows={3} placeholder={job.placeholder} value={form.details} onChange={(e) => set("details", e.target.value)} />)}
       </fieldset>
 
@@ -200,7 +200,7 @@ export function BookingForm({ phone, whatsapp, email }: Props) {
         <button type="submit" className="btn btn-primary btn-lg" disabled={status.kind === "sending"}>
           {status.kind === "sending" ? "Sending…" : "Send it"}
         </button>
-        <p className="small">We ring back with a price. Nothing is booked until you say yes.</p>
+        <p className="small">We ring back with a price and a slot. Nothing is booked until you say yes.</p>
       </div>
     </form>
   );

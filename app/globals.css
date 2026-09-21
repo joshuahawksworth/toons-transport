@@ -539,3 +539,28 @@ input[type="checkbox"]:checked::after, input[type="radio"]:checked::after {
   .mobile-bar .btn { text-align: center; }
   body:has(.mobile-bar) .footer { padding-bottom: calc(96px + env(safe-area-inset-bottom, 0px)); }
 }
+
+/* ---------- contact card: breakdown line and email, next to the form ---------- */
+.contact-card {
+  margin: 1.4rem 0;
+  padding: 18px 20px 6px;
+  border: 1.5px dashed var(--pencil);
+  border-radius: var(--hand-radius-2);
+  display: grid;
+  gap: 16px;
+}
+.contact-row { display: grid; grid-template-columns: 44px minmax(0, 1fr); gap: 14px; align-items: start; }
+.contact-row p { margin: 0 0 6px; }
+.contact-icon {
+  display: grid;
+  place-items: center;
+  width: 42px; height: 42px;
+  border: 2px solid var(--ink);
+  border-radius: var(--hand-radius-2);
+  color: var(--blue);
+}
+.contact-icon svg { width: 24px; height: 24px; }
+.contact-label { font-family: var(--font-hand); font-size: 1.1rem; margin-bottom: 2px; }
+.contact-value { display: inline-block; font-size: 1.25rem; font-weight: 700; margin-bottom: 4px; word-break: break-word; }
+.contact-soon { color: var(--pencil); font-weight: 400; font-style: italic; }
+.contact-extra { margin: -4px 0 12px; }
