@@ -55,7 +55,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             <Link href="/#how">How it works</Link>
             <Link href="/#faq">Questions</Link>
           </nav>
-          <Link href="/#book" className="btn btn-primary nav-cta">Book transport</Link>
+          <Link href="/#book" className="btn btn-primary nav-cta">Book a pickup</Link>
         </header>
         <main id="main">{children}</main>
         <footer className="footer">

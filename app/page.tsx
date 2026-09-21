@@ -18,7 +18,7 @@ export default function Home() {
             Fully enclosed van, goods in transit insurance and a driver who rides. Dealer collections, house moves, track days and trade runs, booked for a day that suits you. Broken down? Ring us and we&rsquo;ll get to you where we can.
           </p>
           <div className="btn-row">
-            <Link href="#book" className="btn btn-primary btn-lg">Book transport</Link>
+            <Link href="#book" className="btn btn-primary btn-lg">Book a pickup</Link>
             {site.phone && <a href={telHref(site.phone)} className="btn btn-lg">Breakdown? Ring {site.phone}</a>}
             {!site.phone && site.whatsapp && <a href={`https://wa.me/${site.whatsapp}`} className="btn btn-lg">WhatsApp us</a>}
           </div>
@@ -45,7 +45,7 @@ export default function Home() {
               <p>
                 Door to door, anywhere in the UK. Dealer and auction collections, eBay buys, a bike to your new house or a mate&rsquo;s garage. Runners, non-runners and seized wheels all welcome, and the price is agreed before we set off.
               </p>
-              <Link href="#book?job=transport" className="book-link">Book transport</Link>
+              <Link href="#book?job=transport" className="book-link">Book a pickup</Link>
             </div>
           </li>
           <li>
