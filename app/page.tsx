@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { BookingForm } from "@/components/BookingForm";
+import { BookLink } from "@/components/BookLink";
 import { Icon, Rule, VanSketch } from "@/components/Sketches";
 import { site, telHref } from "@/lib/site";
 
@@ -18,7 +19,7 @@ export default function Home() {
             Fully enclosed van, goods in transit insurance and a driver who rides. Dealer collections, house moves, track days and trade runs, booked for a day that suits you. Broken down? Ring us and we&rsquo;ll get to you where we can.
           </p>
           <div className="btn-row">
-            <Link href="#book" className="btn btn-primary btn-lg">Book a pickup</Link>
+            <a href="#book" className="btn btn-primary btn-lg">Book a pickup</a>
             {site.phone && <a href={telHref(site.phone)} className="btn btn-lg">Breakdown? Ring {site.phone}</a>}
             {!site.phone && site.whatsapp && <a href={`https://wa.me/${site.whatsapp}`} className="btn btn-lg">WhatsApp us</a>}
           </div>
@@ -45,7 +46,7 @@ export default function Home() {
               <p>
                 Door to door, anywhere in the UK. Dealer and auction collections, eBay buys, a bike to your new house or a mate&rsquo;s garage. Runners, non-runners and seized wheels all welcome, and the price is agreed before we set off.
               </p>
-              <Link href="#book?job=transport" className="book-link">Book a pickup</Link>
+              <BookLink job="transport" className="book-link">Book a pickup</BookLink>
             </div>
           </li>
           <li>
@@ -55,7 +56,7 @@ export default function Home() {
               <p>
                 Track bikes often aren&rsquo;t road legal, so we take yours to the circuit in the van, with tyres, stands and fuel, and bring it home after. Donington, Silverstone, Cadwell, Brands, Oulton, Snetterton, Anglesey, wherever you&rsquo;re booked.
               </p>
-              <Link href="#book?job=trackday" className="book-link">Book a track day run</Link>
+              <BookLink job="trackday" className="book-link">Book a track day run</BookLink>
             </div>
           </li>
           <li>
@@ -63,7 +64,7 @@ export default function Home() {
             <div>
               <h3>Trade and business</h3>
               <p>Dealers, garages, auction houses and insurers: regular collections, customer deliveries and salvage moves, invoiced monthly if you like.</p>
-              <Link href="#book?job=trade" className="book-link">Book a trade job</Link>
+              <BookLink job="trade" className="book-link">Book a trade job</BookLink>
             </div>
           </li>
           <li>
@@ -76,7 +77,7 @@ export default function Home() {
               {site.phone ? (
                 <a href={telHref(site.phone)} className="book-link">Ring {site.phone}</a>
               ) : (
-                <Link href="#contact" className="book-link">How to reach us</Link>
+                <a href="#contact" className="book-link">How to reach us</a>
               )}
             </div>
           </li>

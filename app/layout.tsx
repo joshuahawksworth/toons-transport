@@ -55,7 +55,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             <Link href="/#how">How it works</Link>
             <Link href="/#faq">Questions</Link>
           </nav>
-          <Link href="/#book" className="btn btn-primary nav-cta">Book a pickup</Link>
+          <a href="/#book" className="btn btn-primary nav-cta">Book a pickup</a>
         </header>
         <main id="main">{children}</main>
         <footer className="footer">
@@ -69,7 +69,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             {site.phone ? <a href={telHref(site.phone)}>Breakdowns: {site.phone}</a> : <span className="small">Use the booking form and we'll ring you.</span>}
             {site.email && <a href={`mailto:${site.email}`}>Queries: {site.email}</a>}
             {site.whatsapp && <a href={`https://wa.me/${site.whatsapp}`}>WhatsApp</a>}
-            <Link href="/#book">Booking form</Link>
+            <a href="/#book">Booking form</a>
           </div>
           <div className="footer-col">
             <p className="eyebrow">The boring bits</p>
